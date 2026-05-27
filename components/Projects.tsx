@@ -23,6 +23,7 @@ const projects = [
     `,
     icon: '🤖',
     gradient: 'from-blue-500 to-purple-600',
+    link: null,
   },
   {
     id: 2,
@@ -41,6 +42,7 @@ const projects = [
     `,
     icon: '📈',
     gradient: 'from-teal-500 to-green-600',
+    link: null,
   },
   {
     id: 3,
@@ -58,6 +60,7 @@ const projects = [
     `,
     icon: '🐢',
     gradient: 'from-yellow-500 to-orange-600',
+    link: 'https://colab.research.google.com/drive/1qjTxHYjVcWJaYL3BBJGwvnjoXg6fqpIz?usp=sharing',
   },
   {
     id: 4,
@@ -75,6 +78,7 @@ const projects = [
     `,
     icon: '📊',
     gradient: 'from-indigo-500 to-blue-600',
+    link: null,
   },
   {
     id: 5,
@@ -92,6 +96,7 @@ const projects = [
     `,
     icon: '🌍',
     gradient: 'from-purple-500 to-pink-600',
+    link: null,
   },
   {
     id: 6,
@@ -109,6 +114,7 @@ const projects = [
     `,
     icon: '🚀',
     gradient: 'from-green-500 to-teal-600',
+    link: null,
   },
 ];
 
@@ -139,20 +145,9 @@ export default function Projects() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               <span className="gradient-text">Dự án Tiêu biểu</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto mb-6">
+            <p className="text-gray-400 max-w-2xl mx-auto">
               Các dự án và hệ thống phân tích đã triển khai thực tế
             </p>
-            <motion.a
-              href="https://overlord-aeration-scarcity.ngrok-free.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Xem Live Demo</span>
-              <ExternalLink className="w-4 h-4" />
-            </motion.a>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -189,9 +184,14 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  <div className="flex items-center text-teal-400 text-sm font-medium group-hover:translate-x-2 transition-transform">
-                    <span>Xem chi tiết</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-teal-400 text-sm font-medium group-hover:translate-x-2 transition-transform">
+                      <span>Xem chi tiết</span>
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </div>
+                    {project.link && (
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title="Có demo trực tiếp" />
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -249,19 +249,21 @@ export default function Projects() {
                   dangerouslySetInnerHTML={{ __html: selectedProject.longDescription }}
                 />
 
-                <div className="mt-8 pt-6 border-t border-gray-800">
-                  <motion.a
-                    href="https://overlord-aeration-scarcity.ngrok-free.dev/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span>Xem Live Demo</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </motion.a>
-                </div>
+                {selectedProject.link && (
+                  <div className="mt-8 pt-6 border-t border-gray-800">
+                    <motion.a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span>Xem Live Demo</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>

@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 border-t border-gray-800 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold mb-4">
@@ -64,6 +64,39 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-lg font-semibold text-gray-100 mb-4">
+              Thông tin liên hệ
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-400">📱</span>
+                <a
+                  href="tel:0974963114"
+                  className="text-gray-400 hover:text-teal-400 transition-colors text-sm"
+                >
+                  0974963114
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-400">✉️</span>
+                <a
+                  href="mailto:sanggiau.nguyenpham2006@gmail.com"
+                  className="text-gray-400 hover:text-teal-400 transition-colors text-xs"
+                >
+                  sanggiau.nguyenpham2006@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-400">📍</span>
+                <span className="text-gray-400 text-sm">
+                  TPHCM, Việt Nam
+                </span>
+              </li>
+            </ul>
+          </div>
+
           {/* Connect */}
           <div>
             <h4 className="text-lg font-semibold text-gray-100 mb-4">
@@ -71,7 +104,7 @@ export default function Footer() {
             </h4>
             <div className="flex space-x-4">
               {[
-                { icon: Mail, href: 'mailto:contact@example.com', label: 'Email' },
+                { icon: Mail, href: 'mailto:sanggiau.nguyenpham2006@gmail.com', label: 'Email' },
                 // { icon: Linkedin, href: '#', label: 'LinkedIn' },
                 // { icon: Github, href: '#', label: 'GitHub' },
                 // { icon: X, href: '#', label: 'X (Twitter)' },

@@ -111,6 +111,32 @@ export default function Hero() {
 
             <motion.div
               variants={itemVariants}
+              className="flex flex-wrap gap-3 text-sm"
+            >
+              <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <span className="text-gray-400">📱</span>
+                <span className="text-gray-300">0974963114</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <span className="text-gray-400">✉️</span>
+                <span className="text-gray-300 text-xs">sanggiau.nguyenpham2006@gmail.com</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <span className="text-gray-400">🎂</span>
+                <span className="text-gray-300">2006</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <span className="text-gray-400">📍</span>
+                <span className="text-gray-300">TPHCM</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-lg border border-gray-700">
+                <span className="text-gray-400">👨</span>
+                <span className="text-gray-300">Nam</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
               <motion.a
