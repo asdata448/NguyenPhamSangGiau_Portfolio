@@ -306,7 +306,7 @@ export default function Projects() {
                     </h4>
                     <div className="flex flex-wrap gap-3">
                       {selectedProject.links.map((link, index) => {
-                        const IconComponent = getIconComponent(link.icon);
+                        const IconComponent = getIconComponent(link.icon || 'ExternalLink');
                         return (
                           <motion.a
                             key={index}
