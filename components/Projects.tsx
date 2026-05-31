@@ -2,8 +2,14 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, X, ArrowRight } from 'lucide-react';
+import { ExternalLink, X, ArrowRight, FileText, Code } from 'lucide-react';
 import { useState } from 'react';
+
+type ProjectLink = {
+  url: string;
+  label: string;
+  icon?: 'FileText' | 'Code' | 'ExternalLink';
+};
 
 const projects = [
   {
@@ -23,7 +29,23 @@ const projects = [
     `,
     icon: '🤖',
     gradient: 'from-blue-500 to-purple-600',
-    link: null,
+    links: [
+      {
+        url: 'https://canva.link/x9z4qrbtncmuvor',
+        label: 'Báo cáo dự án',
+        icon: 'FileText',
+      },
+      {
+        url: 'https://colab.research.google.com/drive/1vneaFTttBPvJp6BD3VdHIqB286Hx7_K3?usp=sharing',
+        label: 'Chi tiết bộ mã mô hình hóa',
+        icon: 'Code',
+      },
+      {
+        url: 'https://colab.research.google.com/drive/1t1Au0Fqm-_SDU0J6j6yp0kgoABBLVbO4?usp=sharing',
+        label: 'Bộ mã xử lý dữ liệu',
+        icon: 'Code',
+      },
+    ] as ProjectLink[],
   },
   {
     id: 2,
@@ -42,7 +64,7 @@ const projects = [
     `,
     icon: '📈',
     gradient: 'from-teal-500 to-green-600',
-    link: null,
+    links: [] as ProjectLink[],
   },
   {
     id: 3,
@@ -60,7 +82,13 @@ const projects = [
     `,
     icon: '🐢',
     gradient: 'from-yellow-500 to-orange-600',
-    link: 'https://colab.research.google.com/drive/1qjTxHYjVcWJaYL3BBJGwvnjoXg6fqpIz?usp=sharing',
+    links: [
+      {
+        url: 'https://colab.research.google.com/drive/1qjTxHYjVcWJaYL3BBJGwvnjoXg6fqpIz?usp=sharing',
+        label: 'Xem Demo',
+        icon: 'ExternalLink',
+      },
+    ] as ProjectLink[],
   },
   {
     id: 4,
@@ -78,7 +106,7 @@ const projects = [
     `,
     icon: '📊',
     gradient: 'from-indigo-500 to-blue-600',
-    link: null,
+    links: [] as ProjectLink[],
   },
   {
     id: 5,
@@ -96,7 +124,13 @@ const projects = [
     `,
     icon: '🌍',
     gradient: 'from-purple-500 to-pink-600',
-    link: null,
+    links: [
+      {
+        url: 'https://canva.link/23w74djkevmu47n',
+        label: 'Xem Báo cáo',
+        icon: 'FileText',
+      },
+    ] as ProjectLink[],
   },
   {
     id: 6,
@@ -114,7 +148,7 @@ const projects = [
     `,
     icon: '🚀',
     gradient: 'from-green-500 to-teal-600',
-    link: null,
+    links: [] as ProjectLink[],
   },
 ];
 
@@ -125,6 +159,17 @@ export default function Projects() {
   });
 
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'FileText':
+        return FileText;
+      case 'Code':
+        return Code;
+      default:
+        return ExternalLink;
+    }
+  };
 
   return (
     <>
@@ -189,8 +234,13 @@ export default function Projects() {
                       <span>Xem chi tiết</span>
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </div>
-                    {project.link && (
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title="Có demo trực tiếp" />
+                    {project.links.length > 0 && (
+                      <div className="flex items-center space-x-1">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title={`Có ${project.links.length} demo/dữ liệu`} />
+                        {project.links.length > 1 && (
+                          <span className="text-xs text-gray-500">{project.links.length}</span>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -249,19 +299,31 @@ export default function Projects() {
                   dangerouslySetInnerHTML={{ __html: selectedProject.longDescription }}
                 />
 
-                {selectedProject.link && (
+                {selectedProject.links.length > 0 && (
                   <div className="mt-8 pt-6 border-t border-gray-800">
-                    <motion.a
-                      href={selectedProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <span>Xem Live Demo</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </motion.a>
+                    <h4 className="text-lg font-semibold text-gray-100 mb-4">
+                      {selectedProject.links.length === 1 ? 'Tài liệu dự án' : 'Tài liệu & Demo dự án'}
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {selectedProject.links.map((link, index) => {
+                        const IconComponent = getIconComponent(link.icon);
+                        return (
+                          <motion.a
+                            key={index}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <IconComponent className="w-4 h-4" />
+                            <span>{link.label}</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </motion.a>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </div>
